@@ -77,7 +77,7 @@ class InMemoryPasteService implements PasteService {
   }
 
   private function generateId() {
-    return count($this->db) + 1;
+    return max(array_keys($this->db)) + 1;
   }
 
   /**
