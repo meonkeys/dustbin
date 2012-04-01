@@ -3,9 +3,9 @@
 {% block title %}List Pastes - Dustbin{% endblock %}
 
 {% block content %}
-  <ul>
   {% for paste in pastes %}
-    <li><a href="{{ path('twobulb_paste_paste_get', {'id': paste.id}) }}">paste {{ paste.id }}</a></li>
+    * <a href="{{ path('twobulb_paste_paste_get', {'id': paste.id}) }}">paste {{ paste.id }}</a><br/>
+  {% else %}
+    No pastes found. You can <a href="{{ path('twobulb_paste_paste_new') }}">create a new paste</a>.
   {% endfor %}
-  </ul>
 {% endblock %}
