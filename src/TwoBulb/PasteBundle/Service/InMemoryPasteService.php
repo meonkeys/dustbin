@@ -49,7 +49,7 @@ class InMemoryPasteService implements PasteService {
   }
 
   public function __destruct() {
-    $this->log->info("InMemoryPasteService::__destruct()");
+    $this->log->debug("InMemoryPasteService::__destruct()");
     if (!fclose($this->lockfile))
       $this->log->warn('failed to close lockfile');
     shmop_close($this->shmid);
