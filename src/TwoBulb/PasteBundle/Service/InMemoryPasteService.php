@@ -31,7 +31,11 @@ class InMemoryPasteService implements PasteService {
       shmop_close($this->shmid);
       $this->shmid = shmop_open($this->shm_key, "c", 0666, $this->shm_size);
       $data = shmop_read($this->shmid, 0, $this->shm_size);
-      $this->db = unserialize($data);
+      try {
+        $this->db = unserialize($data);
+      } catch (\Exception $e) {
+        throw new \Exception('unserialize failed. Key already in use?', 500, $e);
+      }
     } else {
       $this->shmid = shmop_open($this->shm_key, "c", 0666, $this->shm_size);
       $this->db = array();
