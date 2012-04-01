@@ -1,0 +1,20 @@
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+maincontent { 
+  font-size: 14px;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", Verdana, Arial, Helvetica, sans-serif;
+}
+
+h1, h2, h3
+{
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+.footer
+{
+  font-size: small;
+}
+

@@ -1,0 +1,4 @@
+services:
+  twobulb_paste_service:
+    class: TwoBulb\PasteBundle\Service\InMemoryPasteService
+    arguments: ["@logger"]

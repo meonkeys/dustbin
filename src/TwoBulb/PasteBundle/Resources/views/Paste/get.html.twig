@@ -1,0 +1,7 @@
+{% extends "TwoBulbPasteBundle::layout.html.twig" %}
+
+{% block title %}View Paste {{ paste.id }} - Dustbin{% endblock %}
+
+{% block content %}
+  <pre>{{ paste.content }}</pre>
+{% endblock %}

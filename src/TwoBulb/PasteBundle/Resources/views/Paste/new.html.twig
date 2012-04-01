@@ -1,0 +1,12 @@
+{% extends "TwoBulbPasteBundle::layout.html.twig" %}
+
+{% block title %}New Paste - Dustbin{% endblock %}
+
+{% block content %}
+  <div id="newPasteForm">
+    <form action="{{ path('twobulb_paste_paste_new') }}" method="post" {{ form_enctype(form) }}>
+      {{ form_widget(form) }}
+      <input type="submit" />
+    </form>
+  </div>
+{% endblock %}
