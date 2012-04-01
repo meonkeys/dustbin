@@ -3,5 +3,9 @@
 {% block title %}List Pastes - Dustbin{% endblock %}
 
 {% block content %}
-  <pre>(list will go here...)</pre>
+  <ul>
+  {% for paste in pastes %}
+    <li><a href="{{ path('twobulb_paste_paste_get', {'id': paste.id}) }}">paste {{ paste.id }}</a></li>
+  {% endfor %}
+  </ul>
 {% endblock %}

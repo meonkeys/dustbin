@@ -4,6 +4,7 @@ namespace TwoBulb\PasteBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use TwoBulb\PasteBundle\Service\Paste;
@@ -36,12 +37,15 @@ class PasteController extends Controller {
   public function newAction(Request $request) {
     $pasteService = $this->getPasteService();
     $paste = new Paste();
+    // FIXME: label is ' ' to suppress label. Hide with CSS instead?
     $form = $this->createFormBuilder($paste)
             ->add('content', 'textarea', array('label' => ' ', 'attr' => array('cols' => 80, 'rows' => 24)))
             ->getForm();
     if ($request->getMethod() == 'POST') {
       $form->bindRequest($request);
 
+      // TODO: add validation markup to Paste object
+      // TODO: make sure content is not null (or image was uploaded)
       if ($form->isValid()) {
         $paste = $pasteService->store($paste);
 
@@ -56,7 +60,24 @@ class PasteController extends Controller {
    * @Template()
    */
   public function listAction() {
-    return array();
+    $pasteService = $this->getPasteService();
+    return array('pastes' => $pasteService->fetchMany(NULL, NULL));
+  }
+
+  /**
+   * @Route("/delete/{id}")
+   * @Template()
+   */
+  public function deleteAction() {
+    // TODO: delete one paste
+  }
+
+  /**
+   * @Route("/deleteAll")
+   * @Template()
+   */
+  public function deleteAllAction() {
+    // TODO: delete all pastes
   }
 
 }
