@@ -6,6 +6,7 @@ class Paste {
 
   private $id;
   private $content;
+  private $createdTimestamp;
 
   public function getId() {
     return $this->id;
@@ -23,6 +24,14 @@ class Paste {
   public function setContent($content) {
     $this->content = $content;
     return $this;
+  }
+
+  public function getCreatedTimestamp() {
+    return $this->createdTimestamp;
+  }
+
+  public function setCreatedTimestamp(\DateTime $createdTimestamp) {
+    $this->createdTimestamp = $createdTimestamp;
   }
 
 }

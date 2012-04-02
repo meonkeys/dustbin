@@ -3,5 +3,8 @@
 {% block title %}View Paste {{ paste.id }} - Dustbin{% endblock %}
 
 {% block content %}
-  <pre>{{ paste.content }}</pre>
+  <pre><code>{{ paste.content }}</code></pre>
+  Paste {{ paste.id }} created {{ paste.createdTimestamp|date("r") }}<br/>
+  <a href="{{ path('twobulb_paste_paste_edit', {'id': paste.id}) }}">edit</a>
+  | <a href="{{ path('twobulb_paste_paste_delete', {'id': paste.id}) }}">delete</a>
 {% endblock %}

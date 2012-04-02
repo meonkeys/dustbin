@@ -1,6 +1,6 @@
-[_] syntax highlighting
-[_] resize UI to fill browser window
-[_] line numbering
+[X] syntax highlighting
+[X] resize UI to fill browser window
+[X] line numbering
 [_] image upload
 [_] CLI
 [_] remove old demo code

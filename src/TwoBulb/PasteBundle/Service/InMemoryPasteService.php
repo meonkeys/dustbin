@@ -20,6 +20,13 @@ class InMemoryPasteService implements PasteService {
     if (!flock($this->lockfile, LOCK_UN))
       throw new \Exception('error unlocking');
   }
+  
+  private function persist() {
+    $data = serialize($this->db);
+      $result = shmop_write($this->shmid, $data, 0);
+      if (FALSE === $result)
+        throw new \Exception('error writing shared memory');
+  }
 
   public function __construct($log) {
     $this->log = $log;
@@ -39,10 +46,7 @@ class InMemoryPasteService implements PasteService {
     } else {
       $this->shmid = shmop_open($this->shm_key, "c", 0666, $this->shm_size);
       $this->db = array();
-      $data = serialize($this->db);
-      $result = shmop_write($this->shmid, $data, 0);
-      if (FALSE === $result)
-        throw new \Exception('error writing shared memory');
+      $this->persist();
     }
     $this->shmid = $this->shmid;
     $this->unlock();
@@ -77,7 +81,11 @@ class InMemoryPasteService implements PasteService {
   }
 
   private function generateId() {
-    return max(array_keys($this->db)) + 1;
+    if (count($this->db) < 1) {
+      return 1;
+    } else {
+      return max(array_keys($this->db)) + 1;
+    }
   }
 
   /**
@@ -88,13 +96,24 @@ class InMemoryPasteService implements PasteService {
     $this->lock();
     $id = $this->generateId();
     $paste->setId($id);
+    $paste->setCreatedTimestamp(new \DateTime());
     $this->db[$paste->getId()] = $paste;
-    $data = serialize($this->db);
-    $result = shmop_write($this->shmid, $data, 0);
+    $this->persist();
     $this->unlock();
-    if (FALSE === $result)
-      throw new \Exception('error writing shared memory');
     return $paste;
+  }
+  public function deleteAll() {
+    $this->lock();
+    $this->db = array();
+    $this->persist();
+    $this->unlock();
+  }
+
+  public function deleteOne($id) {
+    $this->lock();
+    unset($this->db[$id]);
+    $this->persist();
+    $this->unlock();
   }
 
 }

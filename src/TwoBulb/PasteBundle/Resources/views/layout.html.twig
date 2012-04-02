@@ -1,12 +1,17 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="stylesheet" href="{{ asset('bundles/twobulbpaste/css/main.css') }}" type="text/css" media="all" />
-    <title>{% block title %}Dustbin Pastebin{% endblock %}</title>
-    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
-  </head>
-  <body>
+{% extends "::base.html.twig" %}
+
+{% block title %}Dustbin Pastebin{% endblock %}
+
+{% block stylesheets %}
+{% stylesheets
+    '@TwoBulbPasteBundle/Resources/public/css/*'
+    '@TwoBulbPasteBundle/Resources/public/js/highlight/styles/default.css'
+%}
+<link rel="stylesheet" href="{{ asset_url }}" />
+{% endstylesheets %}
+{% endblock %}
+
+{% block body %}
     {% if app.session.flash('notice') %}
       <div class="flash-message">
         <em>Notice</em>: {{ app.session.flash('notice') }}
@@ -16,10 +21,23 @@
     <div class="maincontent">
     {% block content %}
     {% endblock %}
+
+    <hr/>
+
+    <div class="footer">
+      <a href="{{ path('twobulb_paste_paste_new') }}">New paste</a>
+      | <a href="{{ path('twobulb_paste_paste_list') }}">List pastes</a>
+      | <a href="{{ path('twobulb_paste_paste_deleteall') }}">Delete all pastes</a>
     </div>
-      <hr/>
-      <div class="footer">
-        <a href="{{ path('twobulb_paste_paste_new') }}">New paste</a> | <a href="{{ path('twobulb_paste_paste_list') }}">List pastes</a>
-      </div>
-  </body>
-</html>
+{% endblock %}
+
+{% block javascripts %}
+{% javascripts
+    '@TwoBulbPasteBundle/Resources/public/js/highlight/highlight.pack.js'
+%}
+<script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
+<script type="text/javascript">
+    hljs.initHighlightingOnLoad();
+</script>
+{% endblock %}

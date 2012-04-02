@@ -4,7 +4,7 @@
 
 {% block content %}
   {% for paste in pastes %}
-    * <a href="{{ path('twobulb_paste_paste_get', {'id': paste.id}) }}">paste {{ paste.id }}</a><br/>
+    <a href="{{ path('twobulb_paste_paste_get', {'id': paste.id}) }}">{{ paste.createdTimestamp|date("r") }}</a><br/>
   {% else %}
     No pastes found. You can <a href="{{ path('twobulb_paste_paste_new') }}">create a new paste</a>.
   {% endfor %}
