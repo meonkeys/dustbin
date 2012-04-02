@@ -15,6 +15,10 @@ Dustbin is built atop Symfony2.
 * other backends besides shared memory
 * prod deployment instructions
 
+# Notes
+
+Editing a paste creates a new paste. 
+
 # License and Copyright
 
 ## Dustbin
