@@ -1,13 +1,19 @@
-# Dustbin README
+# Dustbin
 
-Dustbin is a text and image pastebin.
+Dustbin is a text and [eventually] image pastebin/imagebin.
 
 Dustbin is built atop Symfony2.
 
-# SYNOPSIS
+# Synopsis
 
 1. Install following [this guide](http://symfony.com/doc/current/book/installation.html).
 2. Request <http://example/p/new> in a web browser.
+
+# Coming soon
+
+* paste images
+* other backends besides shared memory
+* prod deployment instructions
 
 # License and Copyright
 
@@ -33,4 +39,4 @@ with this program in a file titled COPYING. If not, see
 Dustbin was originally a fork of the Symfony2 standard distribution version
 2.0.12, which included license text in `LICENSE`. This file is now called
 `LICENSE-Symfony2`. For licensing information of libraries used by Dustbin, see
-their respective source code. 
+their respective source codes. 
